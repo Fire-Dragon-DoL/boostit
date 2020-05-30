@@ -24,5 +24,13 @@ rails new boom \
   --skip-webpack-install
 ```
 
+### Master Key
+
+The master key for credentials.yml.enc is the following:
+
+```
+3a0cfd24099c16866b1e8e42b4ed9018
+```
+
 # TODO
 - Ensure DB is created and migrated when started
