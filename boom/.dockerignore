@@ -1,0 +1,14 @@
+/.bundle
+.envrc
+.ruby-gemset
+.ruby-version
+/.git
+/interactive
+
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+/tmp/pids/*
+!/tmp/pids/
+!/tmp/pids/.keep

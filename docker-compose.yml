@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  boom:
+    depends_on:
+      - storage
+      - kvstorage
+    build: ./boom
+    restart: on-failure
+    entrypoint: ["/app/start.sh"]
+    ports:
+      - "3001:3001"
+    environment:
+      - "REDIS_URL=redis://storage:6379/15"
+      - "REDIS_PROVIDER=REDIS_URL"
+      - "DATABASE_URL=postgres://postgres:whatever@localhost:5400/boom_development"
+  kvstorage:
+    image: redis:6.0.3-alpine3.11
+    restart: always
+    ports:
+      - "6400:6379"
+  storage:
+    image: postgres:12.3-alpine
+    restart: always
+    shm_size: 256M
+    ports:
+      - "5400:5432"
+    environment:
+      - "POSTGRES_PASSWORD=whatever"
