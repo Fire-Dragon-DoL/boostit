@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Domain
   module Serial
     def self.min

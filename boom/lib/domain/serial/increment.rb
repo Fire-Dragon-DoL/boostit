@@ -1,16 +1,16 @@
+# frozen_string_literal: true
+
 module Domain
   module Serial
     class Increment
-      RedisOverflowMessage = "ERR increment or decrement would overflow"
+      REDIS_OVERFLOW_MESSAGE = 'ERR increment or decrement would overflow'
 
       def call(id)
         ::DB::KVStorage.incr(id.to_s)
-      rescue Redis::CommandError => err
-        if err.message == RedisOverflowMessage
-          raise RangeError, "Increasing would overflow"
-        end
+      rescue Redis::CommandError => e
+        raise RangeError, 'Increasing would overflow' if e.message == REDIS_OVERFLOW_MESSAGE
 
-        raise err
+        raise e
       end
 
       def self.call(id)

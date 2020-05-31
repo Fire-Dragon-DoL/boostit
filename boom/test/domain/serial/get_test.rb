@@ -10,12 +10,12 @@ require 'domain/id'
 module Domain
   module Serial
     class GetTest < ActiveSupport::TestCase
-      test 'With unknown id, returns 0' do
+      test 'With unknown id, returns minimum' do
         id = Id::Sample.random
 
         result = Serial::Get.(id)
 
-        assert result == 0
+        assert result == Serial.min
       end
 
       test 'With id with value set, returns set value' do

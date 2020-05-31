@@ -31,7 +31,6 @@ module Domain
         assert result == 1
       end
 
-
       test 'Raises when value already at maximum' do
         id = Id::Sample.random
         value = Serial.max

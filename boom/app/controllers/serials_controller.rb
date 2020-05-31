@@ -7,9 +7,7 @@ class SerialsController < ApplicationController
     render json: { 'current' => 0 }
   end
 
-  def reset
-  end
+  def reset; end
 
-  def next
-  end
+  def next; end
 end

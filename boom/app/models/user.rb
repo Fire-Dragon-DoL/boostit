@@ -6,7 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable,
          :registerable,
          :jwt_authenticatable,
-         jwt_revocation_strategy: :: Devise::JWT::RevocationStrategies::Null
+         jwt_revocation_strategy: ::Devise::JWT::RevocationStrategies::Null
 
   validates :email, format: { with: Devise.email_regexp, allow_blank: true, if: :email_changed? }
   validates :password, presence: { if: :password_required? }
