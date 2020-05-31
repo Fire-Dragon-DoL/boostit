@@ -23,4 +23,14 @@ class IntegrationCase < ActionDispatch::IntegrationTest
   def parsed_body
     JSON.parse(@response.body)
   end
+
+  def register_and_sign_in(id = nil)
+    user = User::Sample.random
+    user.id = id unless id.nil?
+    user.save!
+
+    sign_in(user)
+
+    user
+  end
 end
