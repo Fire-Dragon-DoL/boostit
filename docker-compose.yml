@@ -10,9 +10,9 @@ services:
     ports:
       - "3001:3001"
     environment:
-      - "REDIS_URL=redis://storage:6379/15"
+      - "REDIS_URL=redis://kvstorage:6379/15"
       - "REDIS_PROVIDER=REDIS_URL"
-      - "DATABASE_URL=postgres://postgres:whatever@localhost:5400/boom_development"
+      - "DATABASE_URL=postgres://postgres:whatever@storage:5432/boom_development"
   kvstorage:
     image: redis:6.0.3-alpine3.11
     restart: always

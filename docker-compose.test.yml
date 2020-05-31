@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  boom:
+    restart: "no"
+    entrypoint: ["/app/test.sh"]
+    environment:
+      - "REDIS_URL=redis://kvstorage:6379/15"
+      - "REDIS_PROVIDER=REDIS_URL"
+      - "BOOM_TEST_DATABASE_HOST=storage"
+      - "BOOM_TEST_DATABASE_PORT=5432"
+      - "BOOM_TEST_DATABASE_USERNAME=postgres"
+      - "BOOM_TEST_DATABASE_PASSWORD=whatever"
+      - "RAILS_ENV=test"

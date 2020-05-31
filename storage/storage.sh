@@ -4,7 +4,10 @@ set -e
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
     CREATE DATABASE boom_development;
     CREATE DATABASE boom_production;
+    CREATE DATABASE boom_test;
     \c boom_development
+    CREATE EXTENSION IF NOT EXISTS pgcrypto;
+    \c boom_test
     CREATE EXTENSION IF NOT EXISTS pgcrypto;
     \c boom_production
     CREATE EXTENSION IF NOT EXISTS pgcrypto;
