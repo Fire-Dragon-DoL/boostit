@@ -8,8 +8,7 @@ class SerialsController < ApplicationController
   before_action :authenticate_user!
 
   def current
-    id = current_user.id
-    data = ::Domain::Serial::Get.(id)
+    data = ::Domain::Serial::Get.(current_user.id)
 
     render json: { 'current' => data }
   end
@@ -22,17 +21,16 @@ class SerialsController < ApplicationController
       return
     end
 
-    id = current_user.id
-    value = serial.current
-    data = ::Domain::Serial::Set.(id, value)
+    data = ::Domain::Serial::Set.(current_user.id, serial.current)
 
     render json: { 'current' => data }
   end
 
   def next
-    id = current_user.id
-    data = ::Domain::Serial::Increment.(id)
+    data = ::Domain::Serial::Increment.(current_user.id)
 
     render json: { 'current' => data }
+  rescue RangeError
+    head :bad_request
   end
 end

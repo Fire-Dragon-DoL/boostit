@@ -11,6 +11,10 @@ module Domain
     end
 
     module Sample
+      def self.invalid
+        'a'
+      end
+
       def self.random
         rand(Serial.min..Serial.max)
       end
