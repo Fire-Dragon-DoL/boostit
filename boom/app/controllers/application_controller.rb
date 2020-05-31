@@ -8,8 +8,8 @@ class ApplicationController < ActionController::API
   before_action :expect_jsonapi_content_type
   before_action :expect_jsonapi_accept
 
-  ACCEPT_REGEXP = /application\/vnd\.api\+json\s*;?\s*,/
-  LAST_ACCEPT_REGEXP = /application\/vnd\.api\+json\s*;?\s*$/
+  ACCEPT_REGEXP = %r{application/vnd\.api\+json\s*;?\s*,}.freeze
+  LAST_ACCEPT_REGEXP = %r{application/vnd\.api\+json\s*;?\s*$}.freeze
   JSONAPI_MIME_TYPE = 'application/vnd.api+json'
 
   def render_jsonapi_exception(exception, status: :bad_request)
@@ -20,7 +20,7 @@ class ApplicationController < ActionController::API
   private
 
   def expect_jsonapi_content_type
-    req_content_type = request.headers["Content-Type"]
+    req_content_type = request.headers['Content-Type']
 
     return if req_content_type == JSONAPI_MIME_TYPE
 
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::API
   end
 
   def expect_jsonapi_accept
-    req_accept = request.headers["Accept"]
+    req_accept = request.headers['Accept']
 
     return if req_accept =~ ACCEPT_REGEXP || req_accept =~ LAST_ACCEPT_REGEXP
 
