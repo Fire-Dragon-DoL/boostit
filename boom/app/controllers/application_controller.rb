@@ -5,11 +5,11 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordNotUnique, with: :render_conflict
 
   before_action :set_content_type
+  before_action :expect_jsonapi_content_type
+  before_action :expect_jsonapi_accept
 
-  def set_content_type
-    response.set_header('Content-Type', 'application/vnd.api+json')
-    response.charset = nil
-  end
+  ACCEPT_REGEXP = /application\/vnd\.api\+json;?,/
+  LAST_ACCEPT_REGEXP = /application\/vnd\.api\+json;?$/
 
   def render_jsonapi_exception(exception, status: :bad_request)
     error_data = ErrorData.new(exception)
@@ -17,6 +17,30 @@ class ApplicationController < ActionController::API
   end
 
   private
+
+  def expect_jsonapi_content_type
+    req_content_type = request.headers["Content-Type"]
+
+    return if req_content_type == 'application/vnd.api+json'
+
+    err = UnsupportedMediaTypeError.new('Unsupported media type')
+    error_data = ErrorData.new(err)
+    render jsonapi_errors: error_data, status: :unsupported_media_type
+  end
+
+  def expect_jsonapi_accept
+    req_accept = request.headers["Accept"]
+
+    return if req_accept =~ ACCEPT_REGEXP || req_accept =~ LAST_ACCEPT_REGEXP
+
+    err = NotAcceptableError.new('Not acceptable')
+    error_data = ErrorData.new(err)
+    render jsonapi_errors: error_data, status: :not_acceptable
+  end
+
+  def set_content_type
+    response.set_header('Content-Type', 'application/vnd.api+json')
+  end
 
   def render_conflict(exception)
     render_jsonapi_exception(exception, status: :conflict)

@@ -1,0 +1,2 @@
+class UnsupportedMediaTypeError < StandardError
+end

@@ -9,7 +9,6 @@ class FailureApp < Devise::FailureApp
 
     self.status = 401
     self.content_type = 'application/vnd.api+json'
-    self.charset = nil
     self.response_body = body.to_json
   end
 end

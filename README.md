@@ -67,6 +67,7 @@ How much time did you spend on the assignment? Normally, this is expressed in ho
   the content-type header. Rails ignores the value `charset` set to `nil`,
   appending `utf-8` to the content-type independently of the configured value.
   I wasn't able to resolve this problem with the time allocated
+- Missing testing about headers to respect JSONAPI specification
 
 ### Stretch goals attempted
 - Devise was chosen to integrate OAuth.
