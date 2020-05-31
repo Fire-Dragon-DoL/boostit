@@ -1,24 +1,32 @@
+# frozen_string_literal: true
+
 class RegistrationsController < ::Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
-
     resource.save
 
-    if resource.persisted?
-      if resource.active_for_authentication?
-        sign_up(resource_name, resource)
-        render json: resource.as_json
-      else
-        expire_data_after_sign_in!
-        render json: resource.as_json
-      end
-    else
-      clean_up_passwords resource
-      set_minimum_password_length
-      head :unprocessable_entity
-    end
+    render_resource_error && return unless resource.persisted?
+
+    sign_up_or_expire
+
+    render json: resource.as_json
   rescue ActiveRecord::RecordNotUnique
     head :conflict
+  end
+
+  private
+
+  def render_resource_error
+    clean_up_passwords resource
+    set_minimum_password_length
+    head :unprocessable_entity
+    true
+  end
+
+  def sign_up_or_expire
+    return sign_up(resource_name, resource) if resource.active_for_authentication?
+
+    expire_data_after_sign_in!
   end
 end

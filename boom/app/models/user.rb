@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require 'securerandom'
 
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable
 
-  validates_format_of :email, with: Devise.email_regexp, allow_blank: true, if: :email_changed?
-  validates_presence_of :password, if: :password_required?
-  validates_confirmation_of :password, if: :password_required?
-  validates_length_of :password, within: Devise.password_length, allow_blank: true
+  validates :email, format: { with: Devise.email_regexp, allow_blank: true, if: :email_changed? }
+  validates :password, presence: { if: :password_required? }
+  validates :password, confirmation: { if: :password_required? }
+  validates :password, length: { within: Devise.password_length, allow_blank: true }
 
   def password_required?
     !persisted? || !password.nil? || !password_confirmation.nil?
