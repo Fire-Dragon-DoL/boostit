@@ -7,8 +7,8 @@ module Domain
 
       def call(id)
         ::DB::KVStorage.incr(id.to_s)
-      rescue Redis::CommandError => e
-        raise RangeError, 'Increasing would overflow' if e.message == REDIS_OVERFLOW_MESSAGE
+      rescue ::Redis::CommandError => e
+        raise ::RangeError, 'Increasing would overflow' if e.message == REDIS_OVERFLOW_MESSAGE
 
         raise e
       end

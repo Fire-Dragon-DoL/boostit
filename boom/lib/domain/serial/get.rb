@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'domain/serial'
+
 module Domain
   module Serial
     class Get

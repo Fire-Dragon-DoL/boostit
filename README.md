@@ -29,6 +29,9 @@ rails new boom \
 - [ ] Handle exceptions responses as JSON api
 
 ## Notes
+The actual domain logic is kept in `lib/domain` to isolate from Rails.
+The domain however is very simple in this case, so the advantages don't surface
+(isolation from database, easier Rails upgrades).
 
 ### Date
 The date you're submitting this.

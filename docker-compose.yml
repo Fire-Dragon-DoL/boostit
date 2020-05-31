@@ -13,6 +13,10 @@ services:
       - "REDIS_URL=redis://kvstorage:6379/15"
       - "REDIS_PROVIDER=REDIS_URL"
       - "DATABASE_URL=postgres://postgres:whatever@storage:5432/boom_development"
+      - "BOOM_TEST_DATABASE_HOST=storage"
+      - "BOOM_TEST_DATABASE_PORT=5432"
+      - "BOOM_TEST_DATABASE_USERNAME=postgres"
+      - "BOOM_TEST_DATABASE_PASSWORD=whatever"
   kvstorage:
     image: redis:6.0.3-alpine3.11
     restart: always

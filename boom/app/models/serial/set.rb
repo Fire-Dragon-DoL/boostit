@@ -21,8 +21,8 @@ module Serial
     end
 
     def self.build(params)
-      current = params[:current]
-      current = current.to_i if current.to_i.to_s == current.to_s
+      current = params[:current].to_s
+      current = current.to_i if current.to_i.to_s == current
 
       new(current)
     end
