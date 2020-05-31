@@ -11,5 +11,7 @@ Rails.application.routes.draw do
     end
 
     get '/current', to: 'serials#current', as: :current_serial
+    get '/next', to: 'serials#next', as: :next_serial
+    put '/current', to: 'serials#reset', as: :reset_serial
   end
 end
