@@ -9,14 +9,14 @@ class ResetTest < IntegrationCase
 
     user = register_and_sign_in
     get current_serial_url
-    prior_value = parsed_body['current']
+    prior_value = parsed_body['data']['attributes']['current']
 
     sign_in(user)
     put reset_serial_url, params: { current: value }
 
     sign_in(user)
     get current_serial_url
-    new_value = parsed_body['current']
+    new_value = parsed_body['data']['attributes']['current']
 
     assert prior_value == ::Domain::Serial.min
     assert new_value == value

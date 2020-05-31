@@ -19,11 +19,11 @@ module Current
 
       sign_in(user)
       get current_serial_url
-      result = parsed_body['current']
+      result = parsed_body['data']['attributes']['current']
 
       sign_in(other_user)
       get current_serial_url
-      other_result = parsed_body['current']
+      other_result = parsed_body['data']['attributes']['current']
 
       assert result != other_result
       assert result == value

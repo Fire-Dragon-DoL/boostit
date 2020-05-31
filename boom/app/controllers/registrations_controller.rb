@@ -10,17 +10,17 @@ class RegistrationsController < ::Devise::RegistrationsController
 
     sign_up_or_expire
 
-    render json: resource.as_json
-  rescue ActiveRecord::RecordNotUnique
-    head :conflict
+    render jsonapi: resource
+  rescue ActiveRecord::RecordNotUnique => err
+    render_jsonapi_exception(err, status: :conflict)
   end
 
   private
 
   def render_resource_error
-    clean_up_passwords resource
+    clean_up_passwords(resource)
     set_minimum_password_length
-    head :unprocessable_entity
+    render jsonapi_errors: resource.errors, status: :unprocessable_entity
     true
   end
 

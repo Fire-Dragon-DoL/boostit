@@ -7,11 +7,11 @@ class NextTest < IntegrationCase
   test 'Increases integer for user' do
     user = register_and_sign_in
     get next_serial_url
-    prior_value = parsed_body['current']
+    prior_value = parsed_body['data']['attributes']['current']
 
     sign_in(user)
     get next_serial_url
-    new_value = parsed_body['current']
+    new_value = parsed_body['data']['attributes']['current']
 
     assert prior_value == ::Domain::Serial.min + 1
     assert new_value == prior_value + 1

@@ -25,7 +25,6 @@ rails new boom \
 ```
 
 ## TODO
-- [ ] Ensure DB is created and migrated when started
 - [ ] Handle exceptions responses as JSON api
 
 ## Notes

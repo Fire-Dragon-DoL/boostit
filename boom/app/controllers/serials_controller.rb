@@ -8,29 +8,30 @@ class SerialsController < ApplicationController
   before_action :authenticate_user!
 
   def current
-    data = ::Domain::Serial::Get.(current_user.id)
+    value = ::Domain::Serial::Get.(current_user.id)
+    data = SequenceNumber.new(value)
 
-    render json: { 'current' => data }
+    render jsonapi: data
   end
 
   def reset
     serial = ::Serial::Set.build(params)
 
     unless serial.valid?
-      head :unprocessable_entity
+      render jsonapi_errors: serial.errors, status: :unprocessable_entity
       return
     end
 
-    data = ::Domain::Serial::Set.(current_user.id, serial.current)
+    value = ::Domain::Serial::Set.(current_user.id, serial.current)
+    data = SequenceNumber.new(value)
 
-    render json: { 'current' => data }
+    render jsonapi: data
   end
 
   def next
-    data = ::Domain::Serial::Increment.(current_user.id)
+    value = ::Domain::Serial::Increment.(current_user.id)
+    data = SequenceNumber.new(value)
 
-    render json: { 'current' => data }
-  rescue RangeError
-    head :bad_request
+    render jsonapi: data
   end
 end
