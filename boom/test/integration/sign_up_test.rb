@@ -12,7 +12,7 @@ class SignUpTest < IntegrationCase
       }
     }
 
-    post user_registration_url, params: params
+    post user_registration_url, params: params.to_json, headers: jsonapi_headers
 
     assert @response.status >= 200 && @response.status <= 299
   end
@@ -26,9 +26,9 @@ class SignUpTest < IntegrationCase
       }
     }
 
-    post user_registration_url, params: params
+    post user_registration_url, params: params.to_json, headers: jsonapi_headers
     prior_status = @response.status
-    post user_registration_url, params: params
+    post user_registration_url, params: params.to_json, headers: jsonapi_headers
 
     assert prior_status >= 200 && prior_status <= 299
     assert @response.status != prior_status
@@ -44,7 +44,7 @@ class SignUpTest < IntegrationCase
       }
     }
 
-    post user_registration_url, params: params
+    post user_registration_url, params: params.to_json, headers: jsonapi_headers
 
     assert @response.status == 403
   end
@@ -58,7 +58,7 @@ class SignUpTest < IntegrationCase
       }
     }
 
-    post user_registration_url, params: params
+    post user_registration_url, params: params.to_json, headers: jsonapi_headers
 
     assert @response.status == 403
   end

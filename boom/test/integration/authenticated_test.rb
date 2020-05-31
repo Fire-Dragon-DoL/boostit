@@ -8,7 +8,7 @@ class AuthenticatedTest < IntegrationCase
     user.save!
     sign_in user
 
-    get current_serial_url
+    get current_serial_url, headers: jsonapi_headers
 
     assert @response.status >= 200 && @response.status <= 299
   end

@@ -33,4 +33,11 @@ class IntegrationCase < ActionDispatch::IntegrationTest
 
     user
   end
+
+  def jsonapi_headers
+    {
+      'Content-Type' => ::ApplicationController::JSONAPI_MIME_TYPE,
+      'Accept' => ::ApplicationController::JSONAPI_MIME_TYPE
+    }
+  end
 end

@@ -10,6 +10,7 @@ class ApplicationController < ActionController::API
 
   ACCEPT_REGEXP = /application\/vnd\.api\+json\s*;?\s*,/
   LAST_ACCEPT_REGEXP = /application\/vnd\.api\+json\s*;?\s*$/
+  JSONAPI_MIME_TYPE = 'application/vnd.api+json'
 
   def render_jsonapi_exception(exception, status: :bad_request)
     error_data = ErrorData.new(exception)
@@ -21,7 +22,7 @@ class ApplicationController < ActionController::API
   def expect_jsonapi_content_type
     req_content_type = request.headers["Content-Type"]
 
-    return if req_content_type == 'application/vnd.api+json'
+    return if req_content_type == JSONAPI_MIME_TYPE
 
     err = UnsupportedMediaTypeError.new('Unsupported media type')
     error_data = ErrorData.new(err)
@@ -39,7 +40,7 @@ class ApplicationController < ActionController::API
   end
 
   def set_content_type
-    response.set_header('Content-Type', 'application/vnd.api+json')
+    response.set_header('Content-Type', JSONAPI_MIME_TYPE)
   end
 
   def render_conflict(exception)

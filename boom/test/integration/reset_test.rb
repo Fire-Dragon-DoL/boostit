@@ -8,14 +8,14 @@ class ResetTest < IntegrationCase
     value = ::Domain::Serial::Sample.two
 
     user = register_and_sign_in
-    get current_serial_url
+    get current_serial_url, headers: jsonapi_headers
     prior_value = parsed_body['data']['attributes']['current']
 
     sign_in(user)
-    put reset_serial_url, params: { current: value }
+    put reset_serial_url, params: { current: value }.to_json, headers: jsonapi_headers
 
     sign_in(user)
-    get current_serial_url
+    get current_serial_url, headers: jsonapi_headers
     new_value = parsed_body['data']['attributes']['current']
 
     assert prior_value == ::Domain::Serial.min
@@ -26,7 +26,7 @@ class ResetTest < IntegrationCase
     value = ::Domain::Serial::Sample.invalid
 
     register_and_sign_in
-    put reset_serial_url, params: { current: value }
+    put reset_serial_url, params: { current: value }.to_json, headers: jsonapi_headers
 
     assert @response.status == 403
   end
@@ -35,7 +35,7 @@ class ResetTest < IntegrationCase
     value = ::Domain::Serial.min - 1
 
     register_and_sign_in
-    put reset_serial_url, params: { current: value }
+    put reset_serial_url, params: { current: value }.to_json, headers: jsonapi_headers
 
     assert @response.status == 403
   end
@@ -44,7 +44,7 @@ class ResetTest < IntegrationCase
     value = ::Domain::Serial.max + 1
 
     register_and_sign_in
-    put reset_serial_url, params: { current: value }
+    put reset_serial_url, params: { current: value }.to_json, headers: jsonapi_headers
 
     assert @response.status == 403
   end
