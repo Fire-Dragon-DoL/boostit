@@ -78,3 +78,4 @@ JSONAPI::Rails.configure do |config|
   # config.logger = Logger.new('/dev/null')
   config.logger = Rails.logger
 end
+ActionDispatch::Request.parameter_parsers[:jsonapi] = ActionDispatch::Request.parameter_parsers[:json]

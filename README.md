@@ -68,6 +68,15 @@ How much time did you spend on the assignment? Normally, this is expressed in ho
   appending `utf-8` to the content-type independently of the configured value.
   I wasn't able to resolve this problem with the time allocated
 - Missing testing about headers to respect JSONAPI specification
+- A `PUT` request is not mentioned in the JSONAPI specification. Presuming
+  an update request for `/current`, it should also provide an id on the top
+  level object which doesn't make sense given the context of this project.
+  The ID would be the user id, which should not be needed execute a request
+  on this HTTP API endpoint
+- JSONAPI expects request params to be in body and be inside a `data` attribute
+  in a top-level object. This removes some flexibility from the API and
+  it's difficult to implement with `warden` and `devise`. This part of the
+  spec was not respected in the context of this project
 
 ### Stretch goals attempted
 - Devise was chosen to integrate OAuth.

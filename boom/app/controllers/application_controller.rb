@@ -8,8 +8,8 @@ class ApplicationController < ActionController::API
   before_action :expect_jsonapi_content_type
   before_action :expect_jsonapi_accept
 
-  ACCEPT_REGEXP = /application\/vnd\.api\+json;?,/
-  LAST_ACCEPT_REGEXP = /application\/vnd\.api\+json;?$/
+  ACCEPT_REGEXP = /application\/vnd\.api\+json\s*;?\s*,/
+  LAST_ACCEPT_REGEXP = /application\/vnd\.api\+json\s*;?\s*$/
 
   def render_jsonapi_exception(exception, status: :bad_request)
     error_data = ErrorData.new(exception)
