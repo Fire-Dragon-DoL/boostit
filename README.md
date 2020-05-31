@@ -62,7 +62,11 @@ How much time did you spend on the assignment? Normally, this is expressed in ho
   However the business logic was so shallow that I couldn't justify
   separating them into different object and use them through dependency
   injection
-- Testing for the sign-out process is missing
+- Sign-out process is omitted due to the lack of JWT black-listing
+- JSONAPI specifications instructs to exclude any media type parameters in
+  the content-type header. Rails ignores the value `charset` set to `nil`,
+  appending `utf-8` to the content-type independently of the configured value.
+  I wasn't able to resolve this problem with the time allocated
 
 ### Stretch goals attempted
 - Devise was chosen to integrate OAuth.

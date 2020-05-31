@@ -6,7 +6,6 @@ Rails.application.routes.draw do
     devise_scope :user do
       post '/users', to: 'registrations#create', as: :user_registration
       post '/users/sign_in', to: 'sessions#create', as: :user_session
-      get '/users/sign_out', to: 'sessions#destroy', as: :destroy_user_session
     end
 
     get '/current', to: 'serials#current', as: :current_serial
