@@ -9,5 +9,7 @@ Rails.application.routes.draw do
       post '/sign_in', to: 'devise/sessions#create', as: :user_session
       get '/sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
     end
+
+    get '/current', to: 'serials#current', as: :current_serial
   end
 end

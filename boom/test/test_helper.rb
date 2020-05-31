@@ -18,4 +18,8 @@ end
 
 class IntegrationCase < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
+
+  def parsed_body
+    JSON.parse(@response.body)
+  end
 end
