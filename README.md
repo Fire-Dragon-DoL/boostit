@@ -57,10 +57,18 @@ How much time did you spend on the assignment? Normally, this is expressed in ho
 - `docker-compose` uses a simple `sleep` to start the application after the
   databases. This could be improved with a script testing if databases are
   running
+- The Set/Put/Increment objects shouldn't be used directly but top-level
+  business objects named `Current`, `Next` and `Reset` should be used.
+  However the business logic was so shallow that I couldn't justify
+  separating them into different object and use them through dependency
+  injection
+- Testing for the sign-out process is missing
 
 ### Stretch goals attempted
-If applicable, use this area to tell us what stretch goals you attempted. What went well? What do you wish you
-could have done better? If you didn't attempt any of the stretch goals, feel free to let us know why.
+- Devise was chosen to integrate OAuth.
+  I regretted using it since the purpose was to ease the integration of
+  OAuth but it increased the development time so I wasn't able to work
+  properly on this stretch-goal
 
 ### Instructions to run assignment locally
 
@@ -107,5 +115,21 @@ Were you short on time and not able to include something that you want us to kno
 about? Please list it here so that we know that you considered it.
 
 ### Other information about your submission that you feel it's important that we know if applicable.
+- Devise stretches is set to 12 and includes a pepper to respect
+  [OWASP recommendations on password storage security](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html)
+- JWT was used to ensure fast authentication performance, in combination
+  with Redis as storage (instead of Postgres) for the sequence numbers
+  ensuring very short response times
+- Due to the requirement of having the sequences "gapless", this project
+  has limitations in terms of scaling due to having a single access point to
+  determine the next sequence number
+
 ### Your feedback on this technical challenge
-Have feedback for how we could make this assignment better? Please let us know.
+
+I recommend removing the authentication requirement and focus a more on
+business logic, making it a bit more complex.
+Authentication is something that is not touched often and tend to be touched
+by frameworks, so it ends up being more "configuration" rather than coding.
+
+The `curl` usage examples are incorrect since they don't pass the headers
+needed to respect JSONAPI.
