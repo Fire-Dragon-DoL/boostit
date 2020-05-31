@@ -1,11 +1,9 @@
 class SequenceNumber
+  attr_accessor :id
   attr_accessor :current
 
-  def initialize(value)
+  def initialize(id, value)
+    @id = id
     @current = value
-  end
-
-  def id
-    current
   end
 end

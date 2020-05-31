@@ -28,7 +28,7 @@ class ResetTest < IntegrationCase
     register_and_sign_in
     put reset_serial_url, params: { current: value }
 
-    assert @response.status == 422
+    assert @response.status == 403
   end
 
   test 'Unprocessable if set below minimum' do
@@ -37,7 +37,7 @@ class ResetTest < IntegrationCase
     register_and_sign_in
     put reset_serial_url, params: { current: value }
 
-    assert @response.status == 422
+    assert @response.status == 403
   end
 
   test 'Unprocessable if set above maximum' do
@@ -46,6 +46,6 @@ class ResetTest < IntegrationCase
     register_and_sign_in
     put reset_serial_url, params: { current: value }
 
-    assert @response.status == 422
+    assert @response.status == 403
   end
 end

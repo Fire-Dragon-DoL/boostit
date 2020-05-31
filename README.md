@@ -24,9 +24,6 @@ rails new boom \
   --skip-webpack-install
 ```
 
-## TODO
-- [ ] Handle exceptions responses as JSON api
-
 ## Notes
 The actual domain logic is kept in `lib/domain` to isolate from Rails.
 The domain however is very simple in this case, so the advantages don't surface
@@ -50,6 +47,8 @@ How much time did you spend on the assignment? Normally, this is expressed in ho
 - Maximum value that can be set to `/current` is maximum 64-bit signed integer:
   `9_223_372_036_854_775_807`
 - Minimum value that can be set to `/current` is `0`
+- The project can't match JSONAPI specifications correctly due to business
+  specifications (e.g. `GET` for `/next`, `PUT` for `/current`)
 
 ### Shortcuts/Compromises made
 - Devise configuration has problems with documentation, it was difficult to

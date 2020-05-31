@@ -46,7 +46,7 @@ class SignUpTest < IntegrationCase
 
     post user_registration_url, params: params
 
-    assert @response.status == 422
+    assert @response.status == 403
   end
 
   test 'With invalid password it errors' do
@@ -60,6 +60,6 @@ class SignUpTest < IntegrationCase
 
     post user_registration_url, params: params
 
-    assert @response.status == 422
+    assert @response.status == 403
   end
 end

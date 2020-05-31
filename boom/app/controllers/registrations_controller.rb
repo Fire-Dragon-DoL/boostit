@@ -6,22 +6,22 @@ class RegistrationsController < ::Devise::RegistrationsController
     build_resource(sign_up_params)
     resource.save
 
-    render_resource_error && return unless resource.persisted?
+    unless resource.persisted?
+      clean_resources
+      render jsonapi_errors: resource.errors, status: :forbidden
+      return
+    end
 
     sign_up_or_expire
 
     render jsonapi: resource
-  rescue ActiveRecord::RecordNotUnique => err
-    render_jsonapi_exception(err, status: :conflict)
   end
 
   private
 
-  def render_resource_error
+  def clean_resources
     clean_up_passwords(resource)
     set_minimum_password_length
-    render jsonapi_errors: resource.errors, status: :unprocessable_entity
-    true
   end
 
   def sign_up_or_expire
