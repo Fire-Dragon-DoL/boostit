@@ -7,6 +7,16 @@ Devise.setup do |config|
     manager.failure_app = ::FailureApp
   end
 
+  config.jwt do |jwt|
+    jwt.secret = Rails.application.credentials.jwt_secret_key
+    jwt.expiration_time = 3_600 * 24
+    jwt.dispatch_requests = [
+      ['POST', %r{^/v.+/users$}],
+      ['POST', %r{^/v.+/users/sign_in$}]
+    ]
+    jwt.request_formats = { user: [:jsonapi] }
+  end
+
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.

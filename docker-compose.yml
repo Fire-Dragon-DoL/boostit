@@ -19,7 +19,7 @@ services:
     ports:
       - "6400:6379"
   storage:
-    image: postgres:12.3-alpine
+    build: ./storage
     restart: always
     shm_size: 256M
     ports:

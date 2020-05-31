@@ -3,7 +3,10 @@
 require 'securerandom'
 
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable
+  devise :database_authenticatable,
+         :registerable,
+         :jwt_authenticatable,
+         jwt_revocation_strategy: :: Devise::JWT::RevocationStrategies::Null
 
   validates :email, format: { with: Devise.email_regexp, allow_blank: true, if: :email_changed? }
   validates :password, presence: { if: :password_required? }
@@ -16,6 +19,10 @@ class User < ApplicationRecord
 
   def email_required?
     true
+  end
+
+  def jwt_payload
+    { 'id' => id.to_s }
   end
 
   module Sample
