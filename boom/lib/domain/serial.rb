@@ -1,15 +1,25 @@
 module Domain
   module Serial
-    def self.random
-      rand(0..9_223_372_036_854_775_807)
+    def self.min
+      0
     end
 
-    def self.one
-      1
+    def self.max
+      9_223_372_036_854_775_807
     end
 
-    def self.two
-      2
+    module Sample
+      def self.random
+        rand(Serial.min..Serial.max)
+      end
+
+      def self.one
+        1
+      end
+
+      def self.two
+        2
+      end
     end
   end
 end

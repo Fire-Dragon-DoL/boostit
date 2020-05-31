@@ -2,7 +2,11 @@ module Domain
   module Serial
     class Get
       def call(id)
-        ::DB::KVStorage.get(id)&.to_i || 0
+        value = ::DB::KVStorage.get(id.to_s)
+
+        return Serial.min if value.nil?
+
+        value.to_i
       end
 
       def self.call(id)

@@ -3,6 +3,7 @@
 require 'test_helper'
 require 'domain/serial'
 require 'domain/serial/get'
+require 'domain/serial/increment'
 require 'domain/serial/set'
 require 'domain/id'
 
@@ -17,9 +18,9 @@ module Domain
         assert result == 0
       end
 
-      test 'With id with value set, returns current value' do
+      test 'With id with value set, returns set value' do
         id = Id::Sample.random
-        value = Serial.random
+        value = Serial::Sample.random
 
         Serial::Set.(id, value)
         result = Serial::Get.(id)
@@ -27,11 +28,11 @@ module Domain
         assert result == value
       end
 
-      test 'With different ids, returns current value' do
+      test 'With different ids, returns different values' do
         id = Id::Sample.random
         other_id = Id::Sample.random
-        value = Serial.one
-        other_value = Serial.two
+        value = Serial::Sample.one
+        other_value = Serial::Sample.two
 
         Serial::Set.(id, value)
         Serial::Set.(other_id, other_value)
