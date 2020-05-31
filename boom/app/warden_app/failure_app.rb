@@ -3,7 +3,7 @@
 class FailureApp < Devise::FailureApp
   def respond
     body = {
-      errors: [{ status: "401", title: "Unauthorized", source: {} }],
+      errors: [{ status: '401', title: 'Unauthorized', source: {} }],
       jsonapi: JSONAPI::Rails.config.jsonapi_object
     }.as_json
 

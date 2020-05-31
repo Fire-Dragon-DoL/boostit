@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SerializableErrorData < JSONAPI::Serializable::Error
   title do
     @object.title

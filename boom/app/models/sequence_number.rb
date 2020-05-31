@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SequenceNumber
   attr_accessor :id
   attr_accessor :current
