@@ -17,6 +17,15 @@ class User < ApplicationRecord
   end
 
   module Sample
+    def self.random
+      new_password = password
+      ::User.new(
+        email: email,
+        password: new_password,
+        password_confirmation: new_password
+      )
+    end
+
     def self.email
       id = SecureRandom.uuid
 
