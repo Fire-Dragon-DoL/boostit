@@ -28,60 +28,60 @@ class App extends React.Component {
       <div className="App">
         <div className={this.classHiddenIfLoggedIn()}>
           <h3>Sign up</h3>
-          <label>
-            <span>Email</span>
-            <input
-              type="email"
-              id="signup-email"
-              value={this.state.signUpEmail}
-              onChange={this.updateSignUpEmail}
-            />
-          </label>
-          <label>
-            <span>Password</span>
-            <input
-              type="password"
-              id="signup-password"
-              value={this.state.signUpPassword}
-              onChange={this.updateSignUpPassword}
-            />
-          </label>
-          <label>
-            <span>Password Confirmation</span>
-            <input
-              type="password"
-              id="signup-password-confirmation"
-              value={this.state.signUpPasswordConfirmation}
-              onChange={this.updateSignUpPasswordConfirmation}
-            />
-          </label>
-          <button type="button" onClick={this.doSignUp}>
-            Sign up
-          </button>
+          <form onSubmit={this.doSignUp}>
+            <label>
+              <span>Email</span>
+              <input
+                type="email"
+                id="signup-email"
+                value={this.state.signUpEmail}
+                onChange={this.updateSignUpEmail}
+              />
+            </label>
+            <label>
+              <span>Password</span>
+              <input
+                type="password"
+                id="signup-password"
+                value={this.state.signUpPassword}
+                onChange={this.updateSignUpPassword}
+              />
+            </label>
+            <label>
+              <span>Password Confirmation</span>
+              <input
+                type="password"
+                id="signup-password-confirmation"
+                value={this.state.signUpPasswordConfirmation}
+                onChange={this.updateSignUpPasswordConfirmation}
+              />
+            </label>
+            <button>Sign up</button>
+          </form>
         </div>
         <div className={this.classHiddenIfLoggedIn()}>
           <h3>Sign in</h3>
-          <label>
-            <span>Email</span>
-            <input
-              type="email"
-              id="signin-email"
-              value={this.state.signInEmail}
-              onChange={this.updateSignInEmail}
-            />
-          </label>
-          <label>
-            <span>Password</span>
-            <input
-              type="password"
-              id="signin-password"
-              value={this.state.signInPassword}
-              onChange={this.updateSignInPassword}
-            />
-          </label>
-          <button type="button" onClick={this.doSignIn}>
-            Sign in
-          </button>
+          <form onSubmit={this.doSignIn}>
+            <label>
+              <span>Email</span>
+              <input
+                type="email"
+                id="signin-email"
+                value={this.state.signInEmail}
+                onChange={this.updateSignInEmail}
+              />
+            </label>
+            <label>
+              <span>Password</span>
+              <input
+                type="password"
+                id="signin-password"
+                value={this.state.signInPassword}
+                onChange={this.updateSignInPassword}
+              />
+            </label>
+            <button>Sign in</button>
+          </form>
         </div>
         <div className={this.classHiddenIfLoggedOut()}>
           <table id="http-api-endpoints">
@@ -103,15 +103,15 @@ class App extends React.Component {
               <tr>
                 <td>PUT /current</td>
                 <td>
-                  <input
-                    type="text"
-                    id="sequence-current"
-                    value={this.state.sequenceCurrent}
-                    onChange={this.updateSequenceCurrent}
-                  />
-                  <button type="button" onClick={this.doReset}>
-                    Reset
-                  </button>
+                  <form onSubmit={this.doReset}>
+                    <input
+                      type="text"
+                      id="sequence-current"
+                      value={this.state.sequenceCurrent}
+                      onChange={this.updateSequenceCurrent}
+                    />
+                    <button>Reset</button>
+                  </form>
                 </td>
               </tr>
               <tr>
@@ -168,7 +168,9 @@ class App extends React.Component {
     this.setState({ sequenceCurrent: event.target.value });
   };
 
-  doSignUp = async () => {
+  doSignUp = async (event) => {
+    event.preventDefault();
+
     try {
       let token = await signUp(
         this.state.signUpEmail,
@@ -182,7 +184,9 @@ class App extends React.Component {
     }
   };
 
-  doSignIn = async () => {
+  doSignIn = async (event) => {
+    event.preventDefault();
+
     try {
       let token = await signIn(
         this.state.signInEmail,
@@ -195,7 +199,9 @@ class App extends React.Component {
     }
   };
 
-  doCurrent = async () => {
+  doCurrent = async (event) => {
+    event.preventDefault();
+
     try {
       let value = await current(this.state.token);
       let message = `Current: ${value}`;
@@ -206,7 +212,9 @@ class App extends React.Component {
     }
   };
 
-  doReset = async () => {
+  doReset = async (event) => {
+    event.preventDefault();
+
     try {
       let value = await reset(this.state.token, this.state.sequenceCurrent);
       let message = `Current: ${value}`;
@@ -217,7 +225,9 @@ class App extends React.Component {
     }
   };
 
-  doNext = async () => {
+  doNext = async (event) => {
+    event.preventDefault();
+
     try {
       let value = await next(this.state.token);
       let message = `Current: ${value}`;
