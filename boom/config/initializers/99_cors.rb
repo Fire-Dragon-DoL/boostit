@@ -6,12 +6,12 @@ unless Rails.env.test?
     allow do
       origins ENV.fetch('BOOM_CORS_DOMAIN')
       resource '*',
-        headers: :any,
-        # headers: %w(Content-Type Accept Authorization),
-        methods: :any,
-        # expose: :any,
-        expose: ['Content-Type', 'Authorization', 'ETags', 'Transfer-Encoding'],
-        max_age: 600
+               headers: :any,
+               # headers: %w(Content-Type Accept Authorization),
+               methods: :any,
+               # expose: :any,
+               expose: %w[Content-Type Authorization ETags Transfer-Encoding],
+               max_age: 600
     end
   end
 end
