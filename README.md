@@ -85,9 +85,6 @@ If applicable, please provide the url where we can find and interact with your r
   spec was not respected in the context of this project
 - The UI is implemented poorly and in hurry, but it provides a good baseline
   to test the application directly in the browser
-- Found heavy difficulties in solving CORS issues related to warden
-  authentication. As a solution, authentication is performed directly
-  on the user model instead of using warden
 
 ### Stretch goals attempted
 - Devise was chosen to integrate OAuth.

@@ -10,7 +10,7 @@ export function apiRequest(method, urlText, opts = {}) {
 
   headers.append("Content-Type", "application/vnd.api+json");
   headers.append("Accept", "application/vnd.api+json");
-  if (token === null) {
+  if (token !== null) {
     headers.append("Authorization", `Bearer ${token}`);
   }
 

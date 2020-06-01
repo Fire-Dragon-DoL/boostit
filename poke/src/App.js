@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { signUp, signIn } from "./Auth.js";
+import { current, next, reset } from "./Sequence.js";
 
 async function responseText(response) {
   let text = await response.text();
@@ -195,27 +196,36 @@ class App extends React.Component {
   };
 
   doCurrent = async () => {
-    // let urls = await fetchGifs(this.state.text);
-    // console.log(urls);
-    // this.setState({
-    //   images: urls,
-    // });
+    try {
+      let value = await current(this.state.token);
+      let message = `Current: ${value}`;
+      this.setState({ message });
+      console.info(message);
+    } catch (response) {
+      this.setState({ message: await responseText(response) });
+    }
   };
 
   doReset = async () => {
-    // let urls = await fetchGifs(this.state.text);
-    // console.log(urls);
-    // this.setState({
-    //   images: urls,
-    // });
+    try {
+      let value = await reset(this.state.token, this.state.sequenceCurrent);
+      let message = `Current: ${value}`;
+      this.setState({ message });
+      console.info(message);
+    } catch (response) {
+      this.setState({ message: await responseText(response) });
+    }
   };
 
   doNext = async () => {
-    // let urls = await fetchGifs(this.state.text);
-    // console.log(urls);
-    // this.setState({
-    //   images: urls,
-    // });
+    try {
+      let value = await next(this.state.token);
+      let message = `Current: ${value}`;
+      this.setState({ message });
+      console.info(message);
+    } catch (response) {
+      this.setState({ message: await responseText(response) });
+    }
   };
 }
 
