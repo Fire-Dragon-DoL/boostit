@@ -87,6 +87,8 @@ If applicable, please provide the url where we can find and interact with your r
   to test the application directly in the browser
 - `master.key` file is deployed for ease of use, but should never be committed
   in a real-world project
+- Docker build pipeline can be better organized instead of duplicate
+  environment variables
 
 ### Stretch goals attempted
 - Devise was chosen to integrate OAuth.
