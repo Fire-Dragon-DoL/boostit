@@ -103,6 +103,18 @@ The domain however is very simple in this case, so the advantages don't surface
 
 #### Without Docker
 
+##### Requirements
+
+- Ruby 2.7
+- Bundler 2.x
+- NodeJS 14.x
+- Yarn or npm
+- Port 3001 and 3002 available on localhost
+- Postgres running
+- Redis running
+
+##### Instructions
+
 Set the following environment variables based on your system:
 
 ```bash
@@ -115,18 +127,36 @@ export REACT_APP_BOOM_URL='http://localhost:3001/v1'
 export BOOM_CORS_DOMAIN='localhost:3002'
 ```
 
-- Have a redis instance running
-- Have a Postgres instance running, with a database named `boom_development`
-  created and `create extension pgcrypto` for such database.
-- Make sure port `3001` is available for localhost.
-- Run `./bin/rails db:migrate`
-- Run `./bin/rails s` from `boom` directory.
-- Run `PORT=3002 yarn start` from `poke` directory
+- Create a Postgres database named `boom_development` and
+  `create extension pgcrypto` for such database.
+
+Inside `boom` directory, run the following commands:
+
+```bash
+bundle install
+./bin/rails db:migrate
+./bin/rails s
+```
+
+Inside `poke` directory, run the following commands:
+
+```bash
+yarn install
+export PORT=3002
+yarn start
+```
 
 #### With Docker
 
-If `docker` and `docker-compose` are installed and postgres and redis are
-not present on the system, it's possible to execute the following command:
+##### Requirements
+
+- Docker
+- `docker-compose`
+- Port 3001, 3002, 6400 and 5400 available on localhost
+
+##### Instructions
+
+Inside the root directory of the project, execute the following commands:
 
 ```bash
 docker-compose up --build`
