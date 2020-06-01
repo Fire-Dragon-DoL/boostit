@@ -68,7 +68,7 @@ The domain however is very simple in this case, so the advantages don't surface
 - The Set/Put/Increment objects shouldn't be used directly but top-level
   business objects named `Current`, `Next` and `Reset` should be used.
   However the business logic was so shallow that I couldn't justify
-  separating them into different object and use them through dependency
+  separating those into different objects and use them through dependency
   injection
 - Sign-out process is omitted due to the lack of JWT black-listing
 - JSONAPI specifications instructs to exclude any media type parameters in
@@ -79,7 +79,7 @@ The domain however is very simple in this case, so the advantages don't surface
 - A `PUT` request is not mentioned in the JSONAPI specification. Presuming
   an update request for `/current`, it should also provide an id on the top
   level object which doesn't make sense given the context of this project.
-  The ID would be the user id, which should not be needed execute a request
+  The ID would be the user id, which should not be needed to execute a request
   on this HTTP API endpoint
 - JSONAPI expects request params to be in body and be inside a `data` attribute
   in a top-level object. This removes some flexibility from the API and
@@ -179,13 +179,6 @@ docker-compose -f docker-compose.yml -f docker-compose.test.yml up --build
 Notice that the test suite starts after 30 seconds but the databases might
 not have started yet. Please increase this delay by modifying `boom/test.sh`.
 
-### What did you not include in your solution that you want us to know about?
-Were you short on time and not able to include something that you want us to know
-about? Please list it here so that we know that you considered it.
-
-A pleasant user interface is missing (no CSS applied to the existing one).
-
-
 #### Interactive Testing
 
 Example `curl` commands can be found in `boom/interactive` directory.
@@ -197,6 +190,10 @@ sequence number to 100:
 cd boom
 ./interactive/reset.sh 100
 ```
+
+### What did you not include in your solution that you want us to know about?
+
+A pleasant user interface is missing (no CSS applied to the existing one).
 
 ### Other information about your submission that you feel it's important that we know if applicable.
 - Devise stretches is set to 12 and includes a pepper to respect
@@ -215,5 +212,5 @@ business logic, adding more details on that side.
 Authentication is something that is not touched often and tend to be specific
 to frameworks, so it ends up being more "configuration" rather than coding.
 
-The `curl` usage examples are incorrect since they don't pass the headers
-needed to respect JSONAPI.
+The `curl` usage examples provided in the PDF are incorrect since they
+don't pass the headers needed to respect JSONAPI.
