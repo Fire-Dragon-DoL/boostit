@@ -85,6 +85,8 @@ If applicable, please provide the url where we can find and interact with your r
   spec was not respected in the context of this project
 - The UI is implemented poorly and in hurry, but it provides a good baseline
   to test the application directly in the browser
+- `master.key` file is deployed for ease of use, but should never be committed
+  in a real-world project
 
 ### Stretch goals attempted
 - Devise was chosen to integrate OAuth.
