@@ -3,12 +3,14 @@ import "./App.css";
 import { signUp, signIn } from "./Auth.js";
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      userEmail: "",
-      userPassword: "",
-      userPasswordConfirmation: "",
+      signUpEmail: "",
+      signUpPassword: "",
+      signUpPasswordConfirmation: "",
+      signInEmail: "",
+      signInPassword: "",
       sequenceCurrent: "",
       token: "",
       message: "",
@@ -24,27 +26,27 @@ class App extends React.Component {
             <span>Email</span>
             <input
               type="email"
-              id="user-email"
-              value={this.state.userEmail}
-              onChange={this.updateUserEmail}
+              id="signup-email"
+              value={this.state.signUpEmail}
+              onChange={this.updateSignUpEmail}
             />
           </label>
           <label>
             <span>Password</span>
             <input
               type="password"
-              id="user-password"
-              value={this.state.userPassword}
-              onChange={this.updateUserPassword}
+              id="signup-password"
+              value={this.state.signUpPassword}
+              onChange={this.updateSignUpPassword}
             />
           </label>
           <label>
             <span>Password Confirmation</span>
             <input
               type="password"
-              id="user-password-confirmation"
-              value={this.state.userPasswordConfirmation}
-              onChange={this.updateUserPasswordConfirmation}
+              id="signup-password-confirmation"
+              value={this.state.signUpPasswordConfirmation}
+              onChange={this.updateSignUpPasswordConfirmation}
             />
           </label>
           <button type="button" onClick={this.doSignUp}>
@@ -57,18 +59,18 @@ class App extends React.Component {
             <span>Email</span>
             <input
               type="email"
-              id="user-email"
-              value={this.state.userEmail}
-              onChange={this.updateUserEmail}
+              id="signin-email"
+              value={this.state.signInEmail}
+              onChange={this.updateSignInEmail}
             />
           </label>
           <label>
             <span>Password</span>
             <input
               type="password"
-              id="user-password"
-              value={this.state.userPassword}
-              onChange={this.updateUserPassword}
+              id="signin-password"
+              value={this.state.signInPassword}
+              onChange={this.updateSignInPassword}
             />
           </label>
           <button type="button" onClick={this.doSignIn}>
@@ -141,27 +143,40 @@ class App extends React.Component {
     return "";
   };
 
-  updateUserEmail = (event) => {
-    this.setState({ userEmail: event.target.value });
+  updateSignUpEmail = (event) => {
+    this.setState({ signUpEmail: event.target.value });
   };
-  updateUserPassword = (event) => {
-    this.setState({ userPassword: event.target.value });
+  updateSignUpPassword = (event) => {
+    this.setState({ signUpPassword: event.target.value });
   };
-  updateUserPasswordConfirmation = (event) => {
-    this.setState({
-      userPasswordCOupdateUserPasswordConfirmation: event.target.value,
-    });
+  updateSignUpPasswordConfirmation = (event) => {
+    this.setState({ signUpPasswordConfirmation: event.target.value });
+  };
+  updateSignInEmail = (event) => {
+    this.setState({ signInEmail: event.target.value });
+  };
+  updateSignInPassword = (event) => {
+    this.setState({ signInPassword: event.target.value });
   };
   updateSequenceCurrent = (event) => {
     this.setState({ sequenceCurrent: event.target.value });
   };
 
   doSignUp = async () => {
-    // let urls = await fetchGifs(this.state.text);
-    // console.log(urls);
-    // this.setState({
-    //   images: urls,
-    // });
+    try {
+      let token = await signUp(
+        this.state.userEmail,
+        this.state.userPassword,
+        this.state.userPasswordConfirmation
+      );
+      this.setState({
+        token: token,
+      });
+    } catch (response) {
+      this.setState({
+        message: `HTTP Status: ${response.status}, Body: ${response.body}`,
+      });
+    }
   };
 
   doSignIn = async () => {

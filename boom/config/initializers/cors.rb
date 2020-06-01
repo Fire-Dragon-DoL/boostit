@@ -15,13 +15,14 @@
 #       methods: [:get, :post, :put, :patch, :delete, :options, :head]
 #   end
 # end
-# Rails.application.config.middleware.insert_before 0, Rack::Cors do
-#   allow do
-#     origins 'http://your.frontend.domain.com'
-#     resource '*',
-#       headers: %w(Authorization),
-#       methods: :any,
-#       expose: %w(Authorization),
-#       max_age: 600
-#   end
-# end
+Rails.application.config.hosts << ENV.fetch('BOOM_CORS_DOMAIN')
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    origins ENV.fetch('BOOM_CORS_DOMAIN')
+    resource '*',
+      headers: %w(Authorization),
+      methods: :any,
+      expose: %w(Authorization),
+      max_age: 600
+  end
+end

@@ -1,17 +1,25 @@
-// const API_URL = "http://api.giphy.com/v1/gifs/search";
+import { apiRequest } from "./API.js";
 
-// export function fetchGifs(text) {
-//   let url = `${API_URL}?api_key=oeoPRSTlOA1jTrhVTQhH3pvbvnAvdGn1&q=${text}`;
-//   return fetch(url)
-//     .then((response) => {
-//       if (response.status < 200 || response.status > 299) {
-//         return Promise.reject(response);
-//       }
-//       return response;
-//     })
-//     .then((response) => response.json())
-//     .then((response) => response.data)
-//     .then((data) => {
-//       return data.map((gif) => gif.images.original.url);
-//     });
-// }
+export function signUp(email, password, passwordConfirmation) {
+  let data = {
+    user: { email, password, password_confirmation: passwordConfirmation },
+  };
+  let body = JSON.stringify(data);
+
+  return apiRequest("POST", "/users", { body }).then((response) => {
+    let auth = response.headers.get("Authorization");
+    return auth.replace("Bearer ", "");
+  });
+}
+
+export function signIn(email, password) {
+  let data = {
+    user: { email, password },
+  };
+  let body = JSON.stringify(data);
+
+  return apiRequest("POST", "/users/sign_in", { body }).then((response) => {
+    let auth = response.headers.get("Authorization");
+    return auth.replace("Bearer ", "");
+  });
+}
