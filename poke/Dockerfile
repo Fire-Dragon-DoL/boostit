@@ -5,20 +5,21 @@ ENV LANG C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
 
+RUN yarn global add serve
+
 # --------------------------------------------------
 
 FROM node_deps AS poke
 
 WORKDIR /app
 
-ARG app_env=development
-ENV NODE_ENV=$app_env
 EXPOSE 3002
-ENTRYPOINT ["yarn"]
-CMD ["start"]
+CMD ["serve", "-p", "3002", "-s", "./build"]
 
 COPY package.json package.json
 COPY yarn.lock yarn.lock
 RUN yarn install
 
 COPY . .
+
+RUN yarn run build

@@ -1,6 +1,6 @@
 #!/bin/bash
 
 echo 'Starting poke ...'
-sleep 1
-yarn start
+sleep 30
+serve -p 3002 -s ./build
 exit $?
