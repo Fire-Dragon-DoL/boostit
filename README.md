@@ -41,7 +41,7 @@ The domain however is very simple in this case, so the advantages don't surface
 - Authentication, 4 hours
 - HTTP API endpoints and business logic 2 hours
 - JSONAPI specification 4 hours
-- UI 4 hours (CORS issues)
+- UI 4 hours (3 hours spent on CORS issues)
 - Deployment 1 hour
 
 ### Assumptions made
