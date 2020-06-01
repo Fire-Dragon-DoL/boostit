@@ -100,6 +100,10 @@ Set the following environment variables based on your system:
 export REDIS_URL="redis://localhost:6400/15"
 export REDIS_PROVIDER='REDIS_URL'
 export DATABASE_URL="postgres://postgres:whatever@localhost:5400/boom_development"
+# Location of rails app (API)
+export REACT_APP_BOOM_URL='http://localhost:3001/v1'
+# Domain of frontend app
+export BOOM_CORS_DOMAIN='localhost:3002'
 ```
 
 - Have a redis instance running
