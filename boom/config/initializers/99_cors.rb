@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 unless Rails.env.test?
-  Rails.application.config.hosts << ENV.fetch('BOOM_CORS_DOMAIN')
+  ENV.fetch('BOOM_CORS_DOMAIN').split(',').each do |domain|
+    Rails.application.config.hosts << domain
+  end
   Rails.application.config.middleware.insert_before 0, Rack::Cors, debug: true, logger: (-> { Rails.logger }) do
     allow do
-      origins ENV.fetch('BOOM_CORS_DOMAIN')
+      split_origins = ENV.fetch('BOOM_CORS_DOMAIN').split(',')
+      origins *split_origins
       resource '*',
                headers: :any,
                # headers: %w(Content-Type Accept Authorization),
