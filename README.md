@@ -33,14 +33,16 @@ The domain however is very simple in this case, so the advantages don't surface
 2020-05-31
 
 ### Location of deployed application
-If applicable, please provide the url where we can find and interact with your running application.
+- UI: [https://boostit-poke.herokuapp.com/](https://boostit-poke.herokuapp.com/)
+- API: [https://boostit-boom.herokuapp.com/](https://boostit-boom.herokuapp.com/)
 
 ### Time spent
-14 hours, divided as:
+15 hours, divided as:
 - Authentication, 4 hours
 - HTTP API endpoints and business logic 2 hours
 - JSONAPI specification 4 hours
 - UI 4 hours (CORS issues)
+- Deployment 1 hour
 
 ### Assumptions made
 - `/current` endpoint will return `0` if `/next` was never called
@@ -91,12 +93,15 @@ If applicable, please provide the url where we can find and interact with your r
   environment variables
 
 ### Stretch goals attempted
+- UI is provided
 - Devise was chosen to integrate OAuth.
   I regretted using it since the purpose was to ease the integration of
   OAuth but it increased the development time so I wasn't able to work
   properly on this stretch-goal
 
 ### Instructions to run assignment locally
+
+#### Without Docker
 
 Set the following environment variables based on your system:
 
@@ -116,6 +121,9 @@ export BOOM_CORS_DOMAIN='localhost:3002'
 - Make sure port `3001` is available for localhost.
 - Run `./bin/rails db:migrate`
 - Run `./bin/rails s` from `boom` directory.
+- Run `PORT=3002 yarn start` from `poke` directory
+
+#### With Docker
 
 If `docker` and `docker-compose` are installed and postgres and redis are
 not present on the system, it's possible to execute the following command:
@@ -124,9 +132,10 @@ not present on the system, it's possible to execute the following command:
 docker-compose up --build`
 ```
 
-This will start the application on port `3001`.
-Notice that the application starts after 30 seconds but the databases might
+This will start the application on port `3001` and UI on port `3002`.
+Notice that the applications start after 30 seconds but the databases might
 not have started yet. Please increase this delay by modifying `boom/start.sh`.
+and `poke/start.sh`
 
 #### Testing
 
@@ -144,7 +153,7 @@ not have started yet. Please increase this delay by modifying `boom/test.sh`.
 Were you short on time and not able to include something that you want us to know
 about? Please list it here so that we know that you considered it.
 
-A pleasant user interface is missing.
+A pleasant user interface is missing (no CSS applied to the existing one).
 
 ### Other information about your submission that you feel it's important that we know if applicable.
 - Devise stretches is set to 12 and includes a pepper to respect
@@ -158,10 +167,10 @@ A pleasant user interface is missing.
 
 ### Your feedback on this technical challenge
 
-I recommend removing the authentication requirement and focus a more on
-business logic, making it a bit more complex.
-Authentication is something that is not touched often and tend to be touched
-by frameworks, so it ends up being more "configuration" rather than coding.
+I recommend removing the authentication requirement and focus more on
+business logic, adding more details on that side.
+Authentication is something that is not touched often and tend to be specific
+to frameworks, so it ends up being more "configuration" rather than coding.
 
 The `curl` usage examples are incorrect since they don't pass the headers
 needed to respect JSONAPI.
