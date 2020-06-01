@@ -30,13 +30,17 @@ The domain however is very simple in this case, so the advantages don't surface
 (isolation from database, easier Rails upgrades).
 
 ### Date
-The date you're submitting this.
+2020-05-31
 
 ### Location of deployed application
 If applicable, please provide the url where we can find and interact with your running application.
 
 ### Time spent
-How much time did you spend on the assignment? Normally, this is expressed in hours.
+12 hours, divided as:
+- Authentication, 4 hours
+- HTTP API endpoints and business logic 2 hours
+- JSONAPI specification 4 hours
+- UI 2 hours
 
 ### Assumptions made
 - `/current` endpoint will return `0` if `/next` was never called
@@ -49,6 +53,8 @@ How much time did you spend on the assignment? Normally, this is expressed in ho
 - Minimum value that can be set to `/current` is `0`
 - The project can't match JSONAPI specifications correctly due to business
   specifications (e.g. `GET` for `/next`, `PUT` for `/current`)
+- `PUT /current` expects either a url parameter `current` or
+  a JSON object in the body with the shape `{ "current": integer }`
 
 ### Shortcuts/Compromises made
 - Devise configuration has problems with documentation, it was difficult to
@@ -77,6 +83,8 @@ How much time did you spend on the assignment? Normally, this is expressed in ho
   in a top-level object. This removes some flexibility from the API and
   it's difficult to implement with `warden` and `devise`. This part of the
   spec was not respected in the context of this project
+- The UI is implemented poorly and in hurry, but it provides a good baseline
+  to test the application directly in the browser
 
 ### Stretch goals attempted
 - Devise was chosen to integrate OAuth.
@@ -127,6 +135,8 @@ not have started yet. Please increase this delay by modifying `boom/test.sh`.
 ### What did you not include in your solution that you want us to know about?
 Were you short on time and not able to include something that you want us to know
 about? Please list it here so that we know that you considered it.
+
+A pleasant user interface is missing.
 
 ### Other information about your submission that you feel it's important that we know if applicable.
 - Devise stretches is set to 12 and includes a pepper to respect
