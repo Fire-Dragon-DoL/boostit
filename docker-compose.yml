@@ -21,7 +21,10 @@ services:
   poke:
     depends_on:
       - boom
-    build: ./poke
+    build:
+      context: ./poke
+      args:
+        - "boom_url=http://localhost:3001/v1"
     restart: always
     entrypoint: ["/app/start.sh"]
     ports:

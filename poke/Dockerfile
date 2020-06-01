@@ -13,6 +13,8 @@ FROM node_deps AS poke
 
 WORKDIR /app
 
+ARG boom_url='http://localhost:3001/v1'
+ENV REACT_APP_BOOM_URL="${boom_url}"
 EXPOSE 3002
 CMD ["serve", "-p", "3002", "-s", "./build"]
 
