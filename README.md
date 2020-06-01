@@ -167,7 +167,7 @@ Notice that the applications start after 30 seconds but the databases might
 not have started yet. Please increase this delay by modifying `boom/start.sh`.
 and `poke/start.sh`
 
-#### Testing
+##### Automated Testing
 
 To execute the test suite locally, the following commands can be executed from
 the root directory:
@@ -184,6 +184,19 @@ Were you short on time and not able to include something that you want us to kno
 about? Please list it here so that we know that you considered it.
 
 A pleasant user interface is missing (no CSS applied to the existing one).
+
+
+#### Interactive Testing
+
+Example `curl` commands can be found in `boom/interactive` directory.
+It's possible to execute interactive tests by running them from `boom`
+directory. For example, the following interactive test will reset the current
+sequence number to 100:
+
+```bast
+cd boom
+./interactive/reset.sh 100
+```
 
 ### Other information about your submission that you feel it's important that we know if applicable.
 - Devise stretches is set to 12 and includes a pepper to respect

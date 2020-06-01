@@ -1,16 +1,26 @@
 #!/bin/bash
 
+source './interactive/helpers.sh'
+
+token_required
+
+current=${1:-'1000'}
+
+echo "Current will be set to: ${current}, change it by passing a different value in the first argument"
+
+echo 'Setting through JSON body ...'
 curl -X PUT \
   -H "Accept: application/vnd.api+json" \
   -H "Content-Type: application/vnd.api+json" \
   -H "Authorization: Bearer $TOKEN" \
-  --data-raw '{ "current": 1000 }' \
-  'http://localhost:3001/v1/current'
+  --data-raw "{ \"current\": ${current} }" \
+  "${REACT_APP_BOOM_URL}/current"
 echo
 
+echo 'Setting through URL query parameters ...'
 curl -X PUT \
   -H "Accept: application/vnd.api+json" \
   -H "Content-Type: application/vnd.api+json" \
   -H "Authorization: Bearer $TOKEN" \
-  'http://localhost:3001/v1/current?current=1000'
+  "${REACT_APP_BOOM_URL}/current?current=${current}"
 echo
