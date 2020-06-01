@@ -36,11 +36,11 @@ The domain however is very simple in this case, so the advantages don't surface
 If applicable, please provide the url where we can find and interact with your running application.
 
 ### Time spent
-12 hours, divided as:
+14 hours, divided as:
 - Authentication, 4 hours
 - HTTP API endpoints and business logic 2 hours
 - JSONAPI specification 4 hours
-- UI 2 hours
+- UI 4 hours (CORS issues)
 
 ### Assumptions made
 - `/current` endpoint will return `0` if `/next` was never called
@@ -85,6 +85,9 @@ If applicable, please provide the url where we can find and interact with your r
   spec was not respected in the context of this project
 - The UI is implemented poorly and in hurry, but it provides a good baseline
   to test the application directly in the browser
+- Found heavy difficulties in solving CORS issues related to warden
+  authentication. As a solution, authentication is performed directly
+  on the user model instead of using warden
 
 ### Stretch goals attempted
 - Devise was chosen to integrate OAuth.

@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   scope '/v1', format: :jsonapi do
+    # devise_for :users, defaults: { format: :jsonapi }, controllers: { sessions: 'sessions', registrations: 'registrations' }
     devise_for :users, skip: :all, defaults: { format: :jsonapi }
     devise_scope :user do
       post '/users', to: 'registrations#create', as: :user_registration
