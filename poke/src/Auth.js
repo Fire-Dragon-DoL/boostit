@@ -5,6 +5,7 @@ export function signUp(email, password, passwordConfirmation) {
     user: { email, password, password_confirmation: passwordConfirmation },
   };
   let body = JSON.stringify(data);
+  console.info(`POST /users ${body}`);
 
   return apiRequest("POST", "/users", { body }).then((response) => {
     let auth = response.headers.get("Authorization");
@@ -17,6 +18,7 @@ export function signIn(email, password) {
     user: { email, password },
   };
   let body = JSON.stringify(data);
+  console.info(`POST /users/sign_in ${body}`);
 
   return apiRequest("POST", "/users/sign_in", { body }).then((response) => {
     let auth = response.headers.get("Authorization");

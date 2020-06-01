@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  include ActionController::MimeResponds
+  respond_to :jsonapi
+
   rescue_from StandardError, with: :render_jsonapi_exception
   rescue_from ActiveRecord::RecordNotUnique, with: :render_conflict
 

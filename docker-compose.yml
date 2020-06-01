@@ -17,7 +17,7 @@ services:
       - "BOOM_TEST_DATABASE_PORT=5432"
       - "BOOM_TEST_DATABASE_USERNAME=postgres"
       - "BOOM_TEST_DATABASE_PASSWORD=whatever"
-      - "BOOM_CORS_DOMAIN=boom:3001"
+      - "BOOM_CORS_DOMAIN=localhost:3002"
   poke:
     depends_on:
       - boom
@@ -28,7 +28,7 @@ services:
       - "3002:3002"
     environment:
       - "PORT=3002"
-      - "REACT_APP_BOOM_URL=http://boom:3001/v1"
+      - "REACT_APP_BOOM_URL=http://localhost:3001/v1"
   kvstorage:
     image: redis:6.0.3-alpine3.11
     restart: always

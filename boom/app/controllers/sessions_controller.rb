@@ -3,6 +3,7 @@
 class SessionsController < ::Devise::SessionsController
   # POST /resource/sign_in
   def create
+    binding.pry
     self.resource = warden.authenticate!(auth_options)
     sign_in(resource_name, resource)
     render jsonapi: nil

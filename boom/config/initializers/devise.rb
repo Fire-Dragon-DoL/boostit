@@ -16,7 +16,7 @@ Devise.setup do |config|
       ['POST', %r{^/v.+/users$}],
       ['POST', %r{^/v.+/users/sign_in$}]
     ]
-    jwt.request_formats = { user: [:jsonapi] }
+    jwt.request_formats = { user: [:jsonapi, :json] }
   end
 
   # The secret key used by Devise. Devise uses this key to generate

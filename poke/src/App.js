@@ -2,6 +2,11 @@ import React from "react";
 import "./App.css";
 import { signUp, signIn } from "./Auth.js";
 
+async function responseText(response) {
+  let text = await response.text();
+  return `HTTP Status: ${response.status}, Body: ${text}`;
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -165,26 +170,28 @@ class App extends React.Component {
   doSignUp = async () => {
     try {
       let token = await signUp(
-        this.state.userEmail,
-        this.state.userPassword,
-        this.state.userPasswordConfirmation
+        this.state.signUpEmail,
+        this.state.signUpPassword,
+        this.state.signUpPasswordConfirmation
       );
-      this.setState({
-        token: token,
-      });
+      this.setState({ token: token, message: "" });
+      console.info(`Sign up token: ${token}`);
     } catch (response) {
-      this.setState({
-        message: `HTTP Status: ${response.status}, Body: ${response.body}`,
-      });
+      this.setState({ message: await responseText(response) });
     }
   };
 
   doSignIn = async () => {
-    // let urls = await fetchGifs(this.state.text);
-    // console.log(urls);
-    // this.setState({
-    //   images: urls,
-    // });
+    try {
+      let token = await signIn(
+        this.state.signInEmail,
+        this.state.signInPassword
+      );
+      this.setState({ token: token, message: "" });
+      console.info(`Sign in token: ${token}`);
+    } catch (response) {
+      this.setState({ message: await responseText(response) });
+    }
   };
 
   doCurrent = async () => {
