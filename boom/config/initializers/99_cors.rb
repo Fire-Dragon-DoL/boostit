@@ -7,7 +7,7 @@ unless Rails.env.test?
   Rails.application.config.middleware.insert_before 0, Rack::Cors, debug: true, logger: (-> { Rails.logger }) do
     allow do
       split_origins = ENV.fetch('BOOM_CORS_DOMAIN').split(',')
-      origins *split_origins
+      origins(*split_origins)
       resource '*',
                headers: :any,
                # headers: %w(Content-Type Accept Authorization),
