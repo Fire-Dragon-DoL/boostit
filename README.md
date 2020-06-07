@@ -212,5 +212,5 @@ business logic, adding more details on that side.
 Authentication is something that is not touched often and tend to be specific
 to frameworks, so it ends up being more "configuration" rather than coding.
 
-The `curl` usage examples provided in the PDF are incorrect since they
-don't pass the headers needed to respect JSONAPI.
+The `curl` usage examples provided in the requirements document are incorrect
+since they don't pass the headers needed to respect JSONAPI.
